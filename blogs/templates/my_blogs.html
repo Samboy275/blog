@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h2>{{ user.username }}'s BLogs</h2>
+    
+    
+{% endblock header %}
+{% block content %}
+<a class="nav-link text-muted" href="{% url 'blogs:new_post' %}">add new post</a>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2><a class="nav-link" href="{% url 'blogs:my_post' post.id %}">{{ post.title }}</a></h2>
+            </li>
+        
+            <p>{{ post }}</p>
+
+            <p><a href="{% url 'blogs:edit_post' post.id %}">edit blog</a></p>
+        {% empty %}
+            <li>
+                <h2>there are no blog posts here</h2>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load bootstrap5 %}
+{% block header %} 
+    <h2>{{ post.title }}</h2>
+    <p class="muted">by <strong>{{ post.owner.username }}</strong> | <small>{{ post.date_added }}</small></p>
+{% endblock header %}
+
+{% block content %}
+    <h4 class="text-important">{{ post.text }}</h4>
+    <hr>
+    {% if user == post.owner %}
+        <a href="{% url 'blogs:edit_post' post.id %}">edit post</a>
+    {% endif %}
+
+
+    {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                
+                <span class=" text-muted font-weight-normal">
+                   <strong>{{comment.owner}}</strong>  |  <small>{{ comment.date_added }}</small>
+                </span>
+            </p>
+            
+            <div class="card">
+                <div class="card-body">
+                    <p> {{ comment.text |   linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor%}
+
+        <div class="card" style="width: 40rem; height: 25rem;">
+            
+            <div class="card-body">
+                {% if new_comment %}
+                    <div class="alert alert-sccusses">
+                        your comment is awaiting moderation
+                    </div>
+                {% else %}
+                    {% if user.is_authenticated %}
+                        <form method="post" class="form">
+                            {% csrf_token %}
+                            {% bootstrap_form comment_form %}
+                            {% buttons %}
+                                <button name="submit" class="btn btn-primary">add comment</button>
+                            {% endbuttons %}
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+        </div>
+{% endblock content %}

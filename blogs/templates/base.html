@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load bootstrap5 %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>
+            blogging
+        </title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <!--static navbar-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navilinks" aria-expand="false" aria-label="toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand text-muted" href="{% url 'blogs:home' %} ">Blogging</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navilinks">
+                    <ul class="nav navbar-nav navbar-left position-absolute end-0">
+                        {% if user.is_authenticated %}
+                            <li class="nav-link">Welceom, {{ user.username }}</li>
+                            <li><a class="nav-link" href="{% url 'blogs:my_blogs' user.id%}">my blogs</a></li>
+                            <li><a class="nav-link" href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a class="nav-link" href="{% url 'users:register' %}">Register</a></li>
+                            <li><a class="nav-link" href="{% url 'users:login' %}">Login</a></li> 
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom border-dark" style="width:100%; height: 150px;"">
+                {% block header %}
+                {% endblock header %}
+            </div>
+            <div>
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </body>
+</html>

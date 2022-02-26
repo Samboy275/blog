@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% if form.errors %}
+        <p>
+            username and password didnt match
+        </p>
+    {% else %}
+        <form method="post" action="{% url 'users:login' %}">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <button name="submit">login</button>
+            <input type="hidden" name="next" value="{% url 'blogs:home' %}"/>
+        </form>
+    {% endif %}
+{% endblock content %}
