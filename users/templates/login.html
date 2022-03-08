@@ -1,16 +1,20 @@
 {% extends "base.html" %}
+{% load bootstrap5 %}
 
 
+{% block header %}
+    <h3>Login</h3>
+{% endblock header %}
 {% block content %}
     {% if form.errors %}
         <p>
             username and password didnt match
         </p>
     {% else %}
-        <form method="post" action="{% url 'users:login' %}">
+        <form method="post" action="{% url 'users:login' %}" class="form">
             {% csrf_token %}
-            {{ form.as_p }} 
-            <button name="submit">login</button>
+            {% bootstrap_form form %} 
+            <button name="submit" class="btn btn-primary">login</button>
             <input type="hidden" name="next" value="{% url 'blogs:home' %}"/>
         </form>
     {% endif %}

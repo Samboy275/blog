@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-
-
-{% block content %}
+{% load bootstrap5 %}
+{% block header %}
     <h3>register new user :D</h3>
-    <form method="post" action="{% url 'users:register' %}">
+{% endblock header%}
+{% block content %}
+    <form method="post" action="{% url 'users:register' %}" class="form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit">register</button>
+        {% bootstrap_form form %}
+        <button name="submit" class="btn btn-primary">register</button>
         <input type="hidden" name="next" value="{% url 'blogs:home' %}"/>
     </form>
 {% endblock content %}

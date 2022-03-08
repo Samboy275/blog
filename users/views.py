@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from users.forms import SignUpForm
 # Create your views here.
 
 
@@ -17,10 +17,10 @@ def register_view(request):
 
     if request.method != 'POST':
         # initial get request new form
-        form = UserCreationForm()
+        form = SignUpForm()
     else:
         # user submitted data processing 
-        form = UserCreationForm(data=request.POST)
+        form = SignUpForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
             authenticated_user = authenticate(username = new_user.username , password = request.POST['password1'])

@@ -32,7 +32,6 @@ class Comments(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
-
     class Meta:
         # orders comments in a list by date
         ordering = ['date_added']
