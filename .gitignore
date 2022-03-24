@@ -1,3 +1,4 @@
-blog_env/
+blog_env/*
+.env
 __pycache__/
 *.sqlite3

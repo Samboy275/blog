@@ -1,4 +1,5 @@
-from django.shortcuts import render
+
+from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
@@ -29,3 +30,23 @@ def register_view(request):
     context = {'form' : form}
     
     return render(request, 'register.html', context)
+
+
+def login_view(request):
+    """login user"""
+
+    if request.method != "POST":
+        # intial request
+        return render(request, 'login.html')
+    else:
+        context = {'data' : request.form}
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        user = authenticate(request, username = username, password = password)
+
+        if not user:
+            # user isnt registered
+            return render("users:login", message="Invalid credentials")
+        
+        
