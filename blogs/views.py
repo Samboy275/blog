@@ -67,10 +67,12 @@ def post_view(request, post_id):
     """displays a single post"""
 
     post = BlogPost.objects.get(id = post_id)
+    #comments 
     comments = post.comments.filter(active=True)
     comment_form = None
     new_comment = None
     if request.user.is_authenticated:
+            # handling comments for each post
             if request.method == 'POST':
                 comment_form = Comments_Form(data=request.POST)
                 if comment_form.is_valid():
