@@ -34,7 +34,7 @@ class Comments(models.Model):
     active = models.BooleanField(default=False)
     class Meta:
         # orders comments in a list by date
-        ordering = ['date_added']
+        ordering = ['-date_added']
     def __str__(self):
         if len(self.text) > 50:
             return self.text[:50] + ' ....'

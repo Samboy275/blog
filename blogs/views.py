@@ -2,7 +2,7 @@ from hashlib import new
 from wsgiref.util import request_uri
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponseServerError
 
 from django.contrib.auth.decorators import login_required
 from .models import BlogPost
@@ -85,3 +85,9 @@ def post_view(request, post_id):
 
     context = {'post': post, 'comments' : comments, 'new_comment' : new_comment, 'comment_form' : comment_form}
     return render(request, 'blog.html', context)
+
+
+# 505 error handler
+def server_error(request):
+    
+    return HttpResponseServerError(request, '500.html')

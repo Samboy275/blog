@@ -22,3 +22,6 @@ urlpatterns = [
     path('', include('blogs.urls', namespace='blogs')),
     path('users', include('users.urls', namespace='users')),
 ]
+
+handler404 = 'helpers.views.page_not_found'
+handler500 = 'helpers.views.server_error'
