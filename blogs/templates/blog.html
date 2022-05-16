@@ -11,6 +11,8 @@
 {% endblock header %}
 
 {% block content %}
+
+{% include '_partials/messages.html' %}
     <h4 class="text-important">{{ post.text }}</h4>
     <hr>
     {% if user == post.owner %}

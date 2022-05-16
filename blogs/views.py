@@ -50,7 +50,7 @@ def edit_post(request, blog_id):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, "Blog editted successfully")
-            return HttpResponseRedirect(reverse('blogs:my_blogs', args=[request.user.id]))
+            return HttpResponseRedirect(reverse('blogs:my_post', args=[blog_idgit]))
     context = {'blog' : post, 'form' : form, 'name' : name }
 
     return render(request, 'edit_post.html', context)

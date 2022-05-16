@@ -8,6 +8,8 @@
     
 {% endblock header %}
 {% block content %}
+
+{% include '_partials/messages.html' %}
 <a class="nav-link text-muted" href="{% url 'blogs:new_post' %}">add new post</a>
     <ul>
         {% for post in posts %}
