@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from .models import User
 from django.contrib import messages
 from validate_email import validate_email
-
+from helpers.decorators import auth_user_should_not_access
 # Create your views here.
 
 
@@ -14,7 +14,7 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('blogs:home'))
 
-
+@auth_user_should_not_access
 def register_view(request):
     """register new user"""
 
@@ -67,7 +67,7 @@ def register_view(request):
         #form = SignUpForm()
         return render(request, 'register.html')
 
-
+@auth_user_should_not_access
 def login_view(request):
     """login user"""
 
