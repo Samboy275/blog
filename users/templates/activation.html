@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hi {{user.username}}
+
+please use the link below to activate your account
+
+
+{{domain}}{% url 'users:activate' uid64=uid token=token %}
+
+
+{% endautoescape %}

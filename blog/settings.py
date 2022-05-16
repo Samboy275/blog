@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY",)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
@@ -119,6 +119,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# Email Config
+EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 
 # Static files (CSS, JavaScript, Images)
