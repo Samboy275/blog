@@ -28,7 +28,7 @@
                     <ul class="nav navbar-nav navbar-left position-absolute end-0">
                         {% if user.is_authenticated %}
                             <li class="nav-link">Welceom, {{ user.username }}</li>
-                            <li><a class="nav-link text-light" href="{% url 'blogs:my_blogs' user.id%}">my blogs</a></li>
+                            <li><a class="nav-link text-light" href="{% url 'blogs:my_blogs' %}">my blogs</a></li>
                             <li><a class="nav-link text-light" href="{% url 'users:logout' %}">Logout</a></li>
                         {% else %}
                             <li><a class="nav-link text-light" href="{% url 'users:register' %}">Register</a></li>

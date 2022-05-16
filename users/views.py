@@ -91,7 +91,7 @@ def login_view(request):
         
         messages.add_message(request, messages.SUCCESS, f"Welcome {user.username}")
         
-        return HttpResponseRedirect(reverse('blogs:home'))
+        return HttpResponseRedirect(reverse('blogs:my_blogs'))
 
 
         

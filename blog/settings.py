@@ -24,12 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY",)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 AUTH_USER_MODEL = "users.User"
 
+LOGIN_URl = "users/login/"
 # Application definition
 
 INSTALLED_APPS = [

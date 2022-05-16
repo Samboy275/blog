@@ -17,6 +17,7 @@
     <hr>
     {% if user == post.owner %}
         <a href="{% url 'blogs:edit_post' post.id %}">edit post</a>
+        <a href="{% url 'blogs:delete_post' post.id%}">Delete Post</a>
     {% endif %}
 
 
