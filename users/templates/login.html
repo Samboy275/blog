@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
 
+{% block title %}
+    Login
+{% endblock title %}
 
 {% block header %}
     <h3>Login</h3>
 {% endblock header %}
 {% block content %}
-    {% if form.errors %}
-        <p>
-            username and password didnt match
-        </p>
-    {% else %}
+{% include '_partials/messages.html' %}
         <form method="post" action="{% url 'users:login' %}" class="form">
             {% csrf_token %}
-            {% bootstrap_form form %} 
+            <div class="mb-5">
+            <label for="userInput" class="form-label">Username</label>
+            <input type="text" required class="form-control" name="Username" placeholder="Username" value="{{ data.Username }}" id="userInput">
+            </div>
+            <div class="mb-5">
+            <input type="password" required class="form-control" name="Password" placeholder="Passeword">
+            </div>
             <button name="submit" class="btn btn-primary">login</button>
             <input type="hidden" name="next" value="{% url 'blogs:home' %}"/>
         </form>
-    {% endif %}
 {% endblock content %}

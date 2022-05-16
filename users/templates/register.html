@@ -1,12 +1,37 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
+
+{% block title %}
+    Register New Account
+{% endblock title %}
+
 {% block header %}
     <h3>register new user :D</h3>
 {% endblock header%}
 {% block content %}
+    {% include '_partials/messages.html' %}
     <form method="post" action="{% url 'users:register' %}" class="form">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        <div class="mb-3 col-xs-2">
+            <label for="InputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" value="{{ data.Username }}" id="InputUsername" name="Username" aria-describedby="usernameHelp">
+            <div id="usernameHelp" class="form-text">No Special Characters</div>
+        </div>
+        <div class="mb-3">
+            <label for="InputEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" value="{{ data.email }}" id="InputEmail" name="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Please provide a valid email</div>
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" value="{{ data.Password1 }}"id="InputPassword" name="Password1" aria-describedby="passwordHelp">
+            <div id="passwordHelp" class="form-text">Minimum 6 Characters</div>
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword2" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="InputPassword2" name="Password2" aria-describedby="password2Help">
+            <div id="password2Help" class="form-text">Enter the same password</div>
+        </div>
         <button name="submit" class="btn btn-primary">register</button>
         <input type="hidden" name="next" value="{% url 'blogs:home' %}"/>
     </form>

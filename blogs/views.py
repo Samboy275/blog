@@ -3,6 +3,7 @@ from wsgiref.util import request_uri
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponseServerError
+from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from .models import BlogPost
@@ -28,7 +29,7 @@ def new_blog(request):
             new_post = form.save(commit=False)
             new_post.owner = request.user
             new_post.save()
-            
+            messages.add_message(request, messages.SUCCESS, "Blog Added successfully")
             return HttpResponseRedirect(reverse('blogs:my_blogs', args=[request.user.id]))
     context = {'form' : form}
     return render(request, 'new_post.html', context)
@@ -48,6 +49,7 @@ def edit_post(request, blog_id):
         form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, "Blog editted successfully")
             return HttpResponseRedirect(reverse('blogs:my_blogs', args=[request.user.id]))
     context = {'blog' : post, 'form' : form, 'name' : name }
 

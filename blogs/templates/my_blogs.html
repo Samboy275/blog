@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-
+{% block title %}
+    {{ user.username }}'s blogs
+{% endblock title %}
 {% block header %}
     <h2>{{ user.username }}'s BLogs</h2>
     

@@ -1,0 +1,9 @@
+{% if messages %}
+    <div class="card" style="width: 18rem; background-color: red; color: red;">
+        <ul class="list-group list-group-flush">
+    {% for message in messages %}
+        <li class="list-group-item" style="color: red;">{{ message }}</li>
+    {% endfor %}
+        </ul>
+    </div>
+{% endif %}

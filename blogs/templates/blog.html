@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% load bootstrap5 %}
+{% block title %}
+    {{ post.title }}
+{% endblock title %}
+
 {% block header %} 
     <h2>{{ post.title }}</h2>
     <p class="muted">by <strong>{{ post.owner.username }}</strong> | <small>{{ post.date_added }}</small></p>

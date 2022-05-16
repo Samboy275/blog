@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
+{% block title %}
+    Home
+{% endblock title %}
 {% block header %}
     <h1>Blogs</h1>
 {% endblock header %}
 
 {% block content %}
-    <ul>
+
+{% include '_partials/messages.html' %}
+
     {% for post in blogs %}
         <li>
             <h2><a class="nav-link" href="{% url 'blogs:my_post' post.id %}">{{ post.title }}</a></h2>
