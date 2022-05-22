@@ -1,4 +1,4 @@
-from email.policy import default
+
 from pyexpat import model
 from django.db import models
 from users.models import User
@@ -21,7 +21,8 @@ class BlogPost(models.Model):
         else:
             return self.text
     
-
+    def get_title(self):
+        return self.title
 
 class Comments(models.Model):
     """comments for a blog"""

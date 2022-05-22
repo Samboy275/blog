@@ -1,0 +1,8 @@
+[run]
+
+omit=
+    */blog_env/*
+    */tests/*
+    */staticfiles/*
+    */migrations/*
+    */__init__.py/*

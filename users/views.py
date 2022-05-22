@@ -1,6 +1,5 @@
-from cgitb import html
-import threading
-from django.shortcuts import redirect, render
+
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate
@@ -49,8 +48,8 @@ def send_verification_email(user, request):
                  from_email=settings.EMAIL_FROM_USER,
                  to=[user.email]
                 )
-  
-    email.send()
+    if not settings.TESTING:
+        email.send()
 
 @auth_user_should_not_access
 def register_view(request):
@@ -72,6 +71,7 @@ def register_view(request):
         if User.objects.filter(username=username).exists():
             messages.add_message(request, messages.ERROR, "Username already exists")
             context["has_error"] = True
+            return render(request, 'register.html', context, status=409)
         
         if len(password1) < 6:
             messages.add_message(request, messages.ERROR, "Password must be atleast 6 characters long")
@@ -88,6 +88,7 @@ def register_view(request):
         if User.objects.filter(email=email):
             messages.add_message(request, messages.ERROR, "Email is already used")
             context["has_error"] = True
+            return render(request, 'register.html', context, status=409)
 
         if context["has_error"]:
             return render(request, 'register.html', context)
