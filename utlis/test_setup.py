@@ -26,7 +26,8 @@ class TestSetup (TestCase):
         user = User.objects.create_user(
             username = "username", email = "email@email.com"
         )
-        user.set_password("password123")
+        user.set_password('password123')
+        user.email_verified = True
         user.save()
 
         return user

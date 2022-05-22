@@ -8,7 +8,7 @@ class TestModel (TestSetup):
 
 
 
-    def test_blogs_creatiion(self):
+    def test_blogs_creatiion_model(self):
         """ testing blogs creation process"""
 
         user = self.create_test_user()
