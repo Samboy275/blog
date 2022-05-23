@@ -9,7 +9,9 @@ class Report(models.Model):
 		(POST, 'post'),
 		(COMMENT, 'comment')
 	)
-
+	# TODO : need to fix the model so it can store a refrence to the reported item
+	
+	text = models.CharField(max_length=250, default='')
 	created_at = models.DateTimeField(auto_now_add=True)
-	reporter = models.ForeignKey(User, related_name='reporter')
-	report_type = models.String(choices = REPORT_TYPES, max_length= 1) 
+	reporter = models.ForeignKey(User, related_name='reporter', on_delete=models.CASCADE)
+	report_type = models.CharField(choices = REPORT_TYPES, max_length= 1) 

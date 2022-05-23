@@ -1,0 +1,12 @@
+{% load bootstrap5 %}
+
+
+<div id="form-div">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+        <input type="hidden" name="comment" id="comment" value="{{ comment.id }}">
+        <input type="hidden" name="post" id="post" value="{{ post.id }}">
+        <br>
+        <button class="btn btn-danger" name="submit">Submit Report</button>
+</div>

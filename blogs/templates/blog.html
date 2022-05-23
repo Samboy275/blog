@@ -16,8 +16,15 @@
     <h4 class="text-important">{{ post.text }}</h4>
     <hr>
     {% if user == post.owner %}
-        <a href="{% url 'blogs:edit_post' post.id %}">edit post</a>
-        <a href="{% url 'blogs:delete_post' post.id%}">Delete Post</a>
+        <a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-primary">edit post</a>
+        <a href="{% url 'blogs:delete_post' post.id%}" class="btn btn-primary">Delete Post</a>
+    {% elif user.is_authenticated %}
+        {% if user.id != post.owner.id %}
+            <button class="btn btn-danger" onclick="Show_Report_Form()">Report</button>
+            <form id="report-container" onsubmit="event.preventDefault(); Submit_Report('p', '{{ post.id }}', '{{ user.id }}')">
+                {% csrf_token %}
+            </form>
+        {% endif %}
     {% endif %}
 
 
@@ -32,7 +39,15 @@
             
             <div class="card">
                 <div class="card-body">
-                    <p> {{ comment.text |   linebreaks }}</p>
+                    <p class="card-text"> {{ comment.text |   linebreaks }}</p>
+                    {% if user.is_authenticated %}
+                        {% if user.id != comment.owner.id %}
+                            <button class="btn btn-danger" onclick="Show_Report_Form()">Report</button>
+                            <form id="report-container" onsubmit="event.preventDefault(); Submit_Report('c', '{{ comment.id }}', '{{ user.id }}');">
+                                {% csrf_token %}
+                            </form>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -57,6 +72,64 @@
                     {% endif %}
                 {% endif %}
             </div>
-
         </div>
+        <script>
+
+            // function to get csrf_token
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            // ajax get request
+            function Show_Report_Form()
+            {
+                $.ajax({
+                    type : 'GET',
+                    url : "{% url 'report:new_report' %}",
+                    success: function(response){
+                        const report_container = document.getElementById("report-container");
+                        report_container.innerHTML = response.form;
+                    }
+                }); 
+            }
+            
+            // ajax post request
+            function Submit_Report(type, reported_id, user_id)
+            {
+                const text = document.getElementById("id_text").value;
+                alert(text)
+                const csrftoken = getCookie("csrftoken");
+                alert(csrftoken);
+                const report_type = type;
+                $.ajax({
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    url : "{% url 'report:new_report' %}",
+                    data:{
+                        text : text,
+                        reported_id: reported_id,
+                        user_id: user_id,
+                        type: type,
+                    },
+                    mode: 'same-origin', // Do not send CSRF token to another domain.
+                    success: function(data){
+                        alert(data.message);
+                    },
+                    error: function(){
+                        alert("this aint working");
+                    }
+                });
+            }
+        </script>
 {% endblock content %}

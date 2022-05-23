@@ -114,7 +114,7 @@ def login_view(request):
         # intial get request
         return render(request, 'login.html')
     else:
-        context = {'data' : request.POST}
+        #context = {'data' : request.POST}
         username = request.POST.get("Username")
         password = request.POST.get("Password")
         user = authenticate(request, username = username, password = password)

@@ -1,4 +1,4 @@
-from pydoc_data.topics import topics
+
 from django import forms
 from .models import BlogPost, Comments
 
@@ -17,4 +17,5 @@ class Comments_Form(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['text']
-        widegts = {'text' : forms.Textarea(attrs={'rows' : 15 ,'cols' : 15})}
+        lablels = {'text' : 'comment'}
+        widegts = {'text' : forms.Textarea(attrs={'rows' : 4 ,'cols' : 15})}

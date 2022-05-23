@@ -1,7 +1,4 @@
-
-from unicodedata import name
-from django.views import View
-from django.urls import path, URLPattern
+from django.urls import path
 from . import views
 
 app_name = 'blogs'
