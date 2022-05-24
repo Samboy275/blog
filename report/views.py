@@ -11,9 +11,9 @@ def check_reported_item(type, id):
     item = None
 
     if type == 'c':
-        item = Comments.objects.filter(id = id)
+        item = Comments.objects.filter(id = id)[0]
     elif type == 'p':
-        item = BlogPost.objects.filter(id = id)
+        item = BlogPost.objects.filter(id = id)[0]
 
     return item
 
@@ -31,8 +31,10 @@ def report_view(request):
             return JsonResponse({
                 'message': "your reports isnt valid"
             })
-        
-        if check_reported_item(report_type, reported_id) == None:
+
+        reported_item = check_reported_item(report_type, reported_id)
+
+        if  reported_item == None:
             return JsonResponse({
                 'message' : 'something went bad'
             })
@@ -43,12 +45,8 @@ def report_view(request):
                 'message': 'something went wrong'
             })
 
-        report = Report(text=text, reporter=reporter, report_type=report_type)
-
-        # TODO : need to fix the model so it can store a refrence to the reported item
-
-        print(report_type, reported_id)
-
+        report = Report(text=text, reporter=reporter, report_type=report_type, reported_id=reported_id, reported_body=reported_item.text)
+        report.save()
         return JsonResponse({
             'message': "your report was submitted successfully awaiting admin review"
         })

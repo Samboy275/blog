@@ -108,9 +108,7 @@
             function Submit_Report(type, reported_id, user_id)
             {
                 const text = document.getElementById("id_text").value;
-                alert(text)
                 const csrftoken = getCookie("csrftoken");
-                alert(csrftoken);
                 const report_type = type;
                 $.ajax({
                     method: 'POST',

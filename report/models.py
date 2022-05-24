@@ -14,4 +14,6 @@ class Report(models.Model):
 	text = models.CharField(max_length=250, default='')
 	created_at = models.DateTimeField(auto_now_add=True)
 	reporter = models.ForeignKey(User, related_name='reporter', on_delete=models.CASCADE)
-	report_type = models.CharField(choices = REPORT_TYPES, max_length= 1) 
+	report_type = models.CharField(choices = REPORT_TYPES, max_length= 1)
+	reported_id = models.IntegerField(null=False, blank=False, default="6")
+	reported_body = models.TextField(null=False, blank=False, default="")
