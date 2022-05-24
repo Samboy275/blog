@@ -33,8 +33,8 @@ class Test_Views(TestSetup):
 
     def test_user_login_successfully(self):
         """ test if a user can login successfully"""
-
-        user = self.create_test_user()
+        username = 'loginuser'
+        user = self.create_test_user(username)
 
         response = self.client.post(reverse("users:login"), {
             "Username" : user.username,

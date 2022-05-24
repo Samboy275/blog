@@ -2,6 +2,7 @@
 from django.test import TestCase
 from users.models import User
 from faker import Faker
+from blogs.models import BlogPost
 
 
 
@@ -21,10 +22,10 @@ class TestSetup (TestCase):
             "Password2" : self.password
         }
 
-    def create_test_user(self):
+    def create_test_user(self, username):
         
         user = User.objects.create_user(
-            username = "username", email = "email@email.com"
+            username = username, email = "email@email.com"
         )
         user.set_password('password123')
         user.email_verified = True
@@ -32,5 +33,13 @@ class TestSetup (TestCase):
 
         return user
 
+    def create_test_blog(self, username):
+
+        user = self.create_test_user(username)
+
+        post = BlogPost.objects.create(owner = user, title = "Test", text = "testing blog creation model")
+
+        post.save()
+        return post
     def tearDown(self):
         print("test finished")
