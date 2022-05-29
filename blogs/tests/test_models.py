@@ -1,4 +1,3 @@
-from xml.etree.ElementTree import Comment
 from utlis.test_setup import TestSetup
 from blogs.models import BlogPost
 from blogs.models import Comments

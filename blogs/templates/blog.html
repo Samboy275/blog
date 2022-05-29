@@ -46,6 +46,11 @@
                             <form id="report-container" onsubmit="event.preventDefault(); Submit_Report('c', '{{ comment.id }}', '{{ user.id }}');">
                                 {% csrf_token %}
                             </form>
+                        {% elif user.id == comment.owner.id %}
+                            <form id="delete-comment" onsubmit="event.preventDefault(); Delete_Comment('{{ comment.id }}');">
+                                {% csrf_token %}
+                                <button name="submit" class="btn btn-danger">Delete Comment</button> 
+                            </form>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -119,6 +124,27 @@
                         reported_id: reported_id,
                         user_id: user_id,
                         type: type,
+                    },
+                    mode: 'same-origin', // Do not send CSRF token to another domain.
+                    success: function(data){
+                        alert(data.message);
+                    },
+                    error: function(){
+                        alert("this aint working");
+                    }
+                });
+            }
+
+            function Delete_Comment(comment_id)
+            {
+                const csrftoken = getCookie("csrftoken");
+
+                $.ajax({
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    url : "{% url 'blogs:delete_comment' %}",
+                    data:{
+                        id : comment_id
                     },
                     mode: 'same-origin', // Do not send CSRF token to another domain.
                     success: function(data){

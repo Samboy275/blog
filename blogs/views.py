@@ -2,11 +2,11 @@ from hashlib import new
 from wsgiref.util import request_uri
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404, HttpResponseServerError
+from django.http import HttpResponseRedirect, Http404, HttpResponseServerError, JsonResponse
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
-from .models import BlogPost
+from .models import BlogPost, Comments
 from .forms import BlogPostForm, Comments_Form
 # Create your views here.
 
@@ -103,6 +103,20 @@ def delete_post(request, post_id):
     context = {"post" : post}
     return render(request, "delete_post.html", context)
 
+
+def delete_comment(request):
+    """ deleting a comment"""
+
+    
+
+    if request.method == "POST":
+        
+        comment_id = request.POST.get("id")
+        comment = get_object_or_404(Comments, pk=comment_id)
+        comment.delete()
+        return JsonResponse({
+            'message' : 'Deleted comment'
+        })
 # 505 error handler
 def server_error(request):
     

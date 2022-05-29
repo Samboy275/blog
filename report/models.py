@@ -1,5 +1,8 @@
 from django.db import models
 from users.models import User
+
+
+
 # Create your models here.
 class Report(models.Model):
 	POST = 'p'
@@ -17,3 +20,7 @@ class Report(models.Model):
 	report_type = models.CharField(choices = REPORT_TYPES, max_length= 1)
 	reported_id = models.IntegerField(null=False, blank=False, default="6")
 	reported_body = models.TextField(null=False, blank=False, default="")
+
+
+
+

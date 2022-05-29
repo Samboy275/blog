@@ -1,6 +1,3 @@
-from http import client
-from urllib import response
-from venv import create
 from django.urls import reverse
 from utlis.test_setup import TestSetup
 from blogs.models import BlogPost, Comments
@@ -89,7 +86,7 @@ class TestView (TestSetup):
 
     def test_delete_post_view_page(self):
 
-        user = "deleteuser"
+        user = "deleteuserview"
         post = self.create_test_blog(user)
 
         self.client.post(reverse("users:login"), {
@@ -101,3 +98,21 @@ class TestView (TestSetup):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "delete_post.html")
+
+
+    def test_delete_post_action(self):
+
+        user = "deleteuser"
+        post = self.create_test_blog(user)
+
+        current_posts = BlogPost.objects.all().count()
+        self.client.post(reverse("users:login"),{
+            'Username' : user,
+            'Password' : 'password123'
+        })
+        response = self.client.post(reverse("blogs:delete_post", args=[post.id]))
+
+        posts_after = BlogPost.objects.all().count()
+        self.assertEqual(current_posts, (posts_after + 1))
+
+        self.assertEqual(response.status_code, 302)
