@@ -10,7 +10,12 @@ from blogs.models import BlogPost, Comments
 class ReportAdmin(admin.ModelAdmin):
     """admin managing reports"""
     # display report porperties in a list
-    list_display = ('reported_body', 'text', 'reporter', 'created_at')
+    list_display = ('reported_text', 'text', 'reporter', 'created_at', 'reported_id')
+
+    def reported_text(self, report):
+
+        return report.reported_object.text
+
     # filter reports based on given properties
     list_filter = ['created_at']
     # search database using

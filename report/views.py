@@ -45,7 +45,7 @@ def report_view(request):
                 'message': 'something went wrong'
             })
 
-        report = Report(text=text, reporter=reporter, report_type=report_type, reported_id=reported_id, reported_body=reported_item.text)
+        report = Report(text=text, reporter=reporter, report_type=report_type, reported_object = reported_item)
         report.save()
         return JsonResponse({
             'message': "your report was submitted successfully awaiting admin review"

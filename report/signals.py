@@ -1,5 +1,4 @@
-from blogs.models import BlogPost
-from blogs.models import Comments
+from blogs.models import BlogPost, Comments
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from report.models import Report
