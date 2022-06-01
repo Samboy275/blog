@@ -4,7 +4,7 @@ beautifulsoup4==4.10.0
 coverage==6.3.3
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==4.0.2
+Django==3.2.13
 django-bootstrap-v5==1.0.11
 django-crispy-forms==1.14.0
 dnspython==2.2.1
