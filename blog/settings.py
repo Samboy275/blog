@@ -31,6 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 AUTH_USER_MODEL = "users.User"
+# static path
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URl = "users/login/"
 # Application definition
