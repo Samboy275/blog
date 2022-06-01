@@ -4,13 +4,14 @@ beautifulsoup4==4.10.0
 coverage==6.3.3
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==3.2.13
+Django==4.0.2
 django-bootstrap-v5==1.0.11
 django-crispy-forms==1.14.0
 dnspython==2.2.1
 Faker==13.11.1
 gunicorn==20.1.0
 idna==3.3
+pkg_resources==0.0.0
 psycopg2==2.9.3
 python-dateutil==2.8.2
 six==1.16.0
