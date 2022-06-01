@@ -42,7 +42,7 @@
                     <p class="card-text"> {{ comment.text |   linebreaks }}</p>
                     {% if user.is_authenticated %}
                         {% if user.id != comment.owner.id %}
-                            <button class="btn btn-danger" onclick="Show_Report_Form()">Report</button>
+                            <button class="btn btn-danger" id="ShowReportForm" onclick="Show_Report_Form()">Report</button>
                             <form id="report-container" onsubmit="event.preventDefault(); Submit_Report('c', '{{ comment.id }}', '{{ user.id }}');">
                                 {% csrf_token %}
                             </form>
@@ -58,7 +58,7 @@
         </div>
     {% endfor%}
 
-        <div class="card" style="width: 40rem; height: 25rem;">
+        <div class="card" style="width: 40rem; height: 10rem;">
             
             <div class="card-body">
                 {% if new_comment %}
@@ -105,6 +105,8 @@
                     success: function(response){
                         const report_container = document.getElementById("report-container");
                         report_container.innerHTML = response.form;
+                        const button = document.getElementById("ShowReportForm");
+                        button.style.display = "none";
                     }
                 }); 
             }

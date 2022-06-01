@@ -19,7 +19,7 @@
         
             <p>{{ post }}</p>
 
-            <p><a href="{% url 'blogs:edit_post' post.id %}">Edit Blog</a></p>
+            <p><a class="btn btn-primary" href="{% url 'blogs:edit_post' post.id %}">Edit Blog</a></p>
             <p><a class="btn btn-danger" href="{% url 'blogs:delete_post' post.id%}">Delete Post</a></p>
         {% empty %}
             <li>
