@@ -17,10 +17,11 @@
     <hr>
     {% if user == post.owner %}
         <a href="{% url 'blogs:edit_post' post.id %}" class="btn btn-primary">edit post</a>
-        <a href="{% url 'blogs:delete_post' post.id%}" class="btn btn-primary">Delete Post</a>
+        <button id="delete-button" class="btn btn-primary" onclick="ShowDeletePage('{{ post.id }}');">Delete Post</button>
+        <form id="delete-post-container" onsubmit="event.preventDefault(); ConfirmDelete('{{post.id}}');"></form>
     {% elif user.is_authenticated %}
         {% if user.id != post.owner.id %}
-            <button class="btn btn-danger" onclick="Show_Report_Form()">Report</button>
+            <button class="btn btn-danger" onclick="event.preventDefault(); Show_Report_Form()">Report</button>
             <form id="report-container" onsubmit="event.preventDefault(); Submit_Report('p', '{{ post.id }}', '{{ user.id }}')">
                 {% csrf_token %}
             </form>
@@ -78,8 +79,8 @@
                 {% endif %}
             </div>
         </div>
+        
         <script>
-
             // function to get csrf_token
             function getCookie(name) {
                 let cookieValue = null;
@@ -156,6 +157,51 @@
                         alert("this aint working");
                     }
                 });
+            }
+
+            function ShowDeletePage(post_id)
+            {
+                $.ajax({
+                    method: 'GET',
+                    url: "{% url 'blogs:delete_post' %}",
+                    data: {
+                        id : post_id
+                    },
+                    success: function(response){
+                        const deleteFormContainer = document.getElementById("delete-post-container");
+                        deleteFormContainer.innerHTML = response.form;
+                        const button = document.getElementById("delete-button");
+                        button.style.display = "none";
+                    }
+                });
+            }
+
+            function ConfirmDelete(post_id)
+            {
+                const csrftoken = getCookie("csrftoken");
+
+                $.ajax({
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    url : "{% url 'blogs:delete_post' %}",
+                    data:{
+                        id : post_id
+                    },
+                    mode: 'same-origin', // Do not send CSRF token to another domain.
+                    success: function(response){
+                        alert(response.message);
+                        window.location.assign("{% url 'blogs:home' %}");
+                    },
+                    error: function(){
+                        alert("this aint working");
+                    }
+                });
+            }
+            function CancelDelete(post_id)
+            {
+                document.getElementById("delete-button").style.display = "initial";
+                const element = document.getElementById("delete-post-container");
+                element.innerHTML = "";
             }
         </script>
 {% endblock content %}

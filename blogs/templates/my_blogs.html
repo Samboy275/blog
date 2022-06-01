@@ -10,7 +10,7 @@
 {% block content %}
 
 {% include '_partials/messages.html' %}
-<a class="nav-link text-muted" href="{% url 'blogs:new_post' %}">add new post</a>
+<a class="btn btn-primary" href="{% url 'blogs:new_post' %}">add new post</a>
     <ul>
         {% for post in posts %}
             <li>
@@ -19,12 +19,77 @@
         
             <p>{{ post }}</p>
 
-            <p><a class="btn btn-primary" href="{% url 'blogs:edit_post' post.id %}">Edit Blog</a></p>
-            <p><a class="btn btn-danger" href="{% url 'blogs:delete_post' post.id%}">Delete Post</a></p>
+            <div>
+                <p><a class="btn btn-primary" href="{% url 'blogs:edit_post' post.id %}">Edit Blog</a></p>
+            <button id="{{ post.id }}button" class="btn btn-primary" onclick="ShowDeletePage('{{ post.id }}');">Delete Post</button>
+            <form id='{{ post.id }}container' onsubmit="event.preventDefault(); ConfirmDelete('{{post.id}}');"></form>
+            </div>
         {% empty %}
             <li>
                 <h2>there are no blog posts here</h2>
             </li>
         {% endfor %}
     </ul>
+
+    <script>
+        function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+        function ShowDeletePage(post_id)
+            {
+                $.ajax({
+                    method: 'GET',
+                    url: "{% url 'blogs:delete_post' %}",
+                    data: {
+                        id : post_id
+                    },
+                    success: function(response){
+                        const deleteFormContainer = document.getElementById(post_id + "container");
+                        deleteFormContainer.innerHTML = response.form;
+                        const button = document.getElementById(post_id + "button");
+                        button.style.display = "none";
+                    }
+                });
+            }
+
+            function ConfirmDelete(post_id)
+            {
+                const csrftoken = getCookie("csrftoken");
+
+                $.ajax({
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    url : "{% url 'blogs:delete_post' %}",
+                    data:{
+                        id : post_id
+                    },
+                    mode: 'same-origin', // Do not send CSRF token to another domain.
+                    success: function(data){
+                        alert("post deleted");
+                        window.location.href = "{%url 'blogs:home' %}"
+                    },
+                    error: function(){
+                        alert("this aint working");
+                    }
+                });
+            }
+            function CancelDelete(post_id)
+            {
+                document.getElementById(post_id + "button").style.display = "initial";
+                const element = document.getElementById(post_id + "container");
+                element.innerHTML = "";
+            }
+    </script>
 {% endblock content %}

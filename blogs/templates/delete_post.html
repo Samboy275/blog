@@ -1,22 +1,10 @@
-{% extends "base.html" %}
 
 {% load bootstrap5 %}
-
-{% block title %}
-    Delete blog
-{% endblock title %}
-
-{% block header %}
-    <h2>Delete Confirmation {{ name }}</h2>
-{% endblock header %}
-
-
-{% block content %}
-    <form action="{% url 'blogs:delete_post' post.id %}" method="POST" class="form">
+    <div>
         {% csrf_token %}
         {% buttons %}
+        <input hidden value="{{ post.id }}" name="id">
         <button name="submit" class="btn btn-danger">Confirm</button>
-        <a class="btn btn-primary" href="{% url 'blogs:my_blogs' %}">Cancle</a>
+        <button type="button" class="btn btn-primary" onclick="CancelDelete('{{ post.id }}');">Cancel</button>
         {% endbuttons %}
-    </form>
-{% endblock content %}
+    </div>

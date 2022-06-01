@@ -14,6 +14,6 @@ urlpatterns = [
     # view one post
     path('my_post/<post_id>', views.post_view, name='my_post'),
     # delete a post
-    path('delete_post/<post_id>', views.delete_post, name='delete_post'),
+    path('delete_post', views.delete_post, name='delete_post'),
     path('delete_comment', views.delete_comment, name='delete_comment'),
 ]

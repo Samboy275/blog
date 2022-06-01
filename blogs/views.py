@@ -1,5 +1,5 @@
-from hashlib import new
-from wsgiref.util import request_uri
+from turtle import pos
+from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponseServerError, JsonResponse
@@ -89,19 +89,27 @@ def post_view(request, post_id):
     return render(request, 'blog.html', context)
 
 @login_required
-def delete_post(request, post_id):
+def delete_post(request):
     """Deleting a post"""
-    post = get_object_or_404(BlogPost, pk=post_id)
+    
     # delete confirmation
     if request.method == "POST":
+        post_id = request.POST.get("id")
+        print(post_id)
+        post = get_object_or_404(BlogPost, pk=post_id)
+        print(post)
         post.delete()
 
         messages.add_message(request, messages.SUCCESS, "Deleted Post")
-        return HttpResponseRedirect(reverse('blogs:my_blogs'))
+        return JsonResponse({
+            "message" : "deleted post"
+        })
 
-    
+    post_id = request.GET.get("id")
+    post = get_object_or_404(BlogPost, pk=post_id)
     context = {"post" : post}
-    return render(request, "delete_post.html", context)
+    template = render_to_string("delete_post.html", context)
+    return JsonResponse({"form" : template})
 
 
 def delete_comment(request):
