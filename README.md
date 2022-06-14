@@ -1,2 +1,1 @@
-# blog
-blog website using django
+[![Python application](https://github.com/Samboy275/blog/actions/workflows/django.yml/badge.svg)](https://github.com/Samboy275/blog/actions/workflows/django.yml)
