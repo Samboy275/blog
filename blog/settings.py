@@ -91,16 +91,30 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+DB_USERNAME = os.environ.get("DB_NAME")
+DB_USER = os.environ.get("DB_USER")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
+DB_HOST = os.environ.get("DB_HOST")
+DB_PORT = os.environ.get("DB_PORT")
+DB_IS_AVAIL = all([
+        DB_USERNAME, 
+        DB_PASSWORD, 
+        DB_HOST,
+        DB_PORT,
+        DB_USER
+])
+
+if DB_IS_AVAIL:
+    DATABASES = {
     'default': {
         'ENGINE': os.environ.get("DB_ENGINE"),
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST' : os.environ.get("DB_HOST"),
-        'PORT' : os.environ.get("DB_PORT")
+        'NAME': DB_USERNAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST' : DB_HOST,
+        'PORT' : DB_PORT
     }
-}
+    }
 
 
 # Password validation
