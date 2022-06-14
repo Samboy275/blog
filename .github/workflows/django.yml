@@ -49,7 +49,7 @@ jobs:
         DB_USER: ${{ env.MY_POSTGRES_USER }}
         DB_PASSWORD: ${{ env.MY_POSTGRES_PASSWORD }}
         DB_HOST: localhost
-        DB_USERNAME: ${{ env.MY_POSTGRES_DB }}
+        DB_DATABASE: ${{ env.POSTGRES_DB }}
         DB_ENGINE: ${{ env.MY_ENGINE }}
         DB_PORT: 5432
       run: |
