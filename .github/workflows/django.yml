@@ -15,7 +15,7 @@ jobs:
       PYTHON_VERSION: 3.8
       MY_POSTGRES_USER: someuser
       MY_POSTGRES_PASSWORD: somepassword
-      MY_POSTGRES_DB: somedbname
+      MY_POSTGRES_DB: github_actions
       MY_ENGINE: django.db.backends.postgresql
     services:
       postgres_main:
