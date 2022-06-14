@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import sys
 
+import django
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -107,7 +109,7 @@ DB_IS_AVAIL = all([
 if DB_IS_AVAIL:
     DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("DB_ENGINE"),
+        'ENGINE': "django.db.backends.postgresql",
         'NAME': DB_USERNAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
