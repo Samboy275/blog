@@ -16,6 +16,7 @@ jobs:
       MY_POSTGRES_USER: someuser
       MY_POSTGRES_PASSWORD: somepassword
       MY_POSTGRES_DB: somedbname
+      MY_ENGINE: django.db.backends.postgresql
     services:
       postgres_main:
         image: postgres:12
@@ -49,6 +50,7 @@ jobs:
         DB_PASSWORD: ${{ env.MY_POSTGRES_PASSWORD }}
         DB_HOST: localhost
         DB_USERNAME: ${{ env.MY_POSTGRES_DB }}
+        DB_ENGINE: ${{ env.MY_ENGINE }}
         DB_PORT: 5432
       run: |
         python manage.py test
