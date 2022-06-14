@@ -17,5 +17,6 @@ class Comments_Form(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['text']
-        lablels = {'text' : 'comment'}
-        widegts = {'text' : forms.Textarea(attrs={'rows' : 4 ,'cols' : 15})}
+        labels = {'text' : ('comment'), }
+        
+        widegts = {'text' : forms.CharField(),}
