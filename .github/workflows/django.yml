@@ -13,7 +13,7 @@ jobs:
     env:
       DJANGO_SECRET_KET: some-test-key
       PYTHON_VERSION: 3.8
-      MY_POSTGRES_USER: someuser
+      MY_POSTGRES_USER: postgres
       MY_POSTGRES_PASSWORD: somepassword
       MY_POSTGRES_DB: github_actions
       MY_ENGINE: django.db.backends.postgresql
