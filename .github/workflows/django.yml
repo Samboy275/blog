@@ -58,10 +58,3 @@ jobs:
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_PORT: ${{ secrets.DB_PORT }}
         DB_ENGINE: ${{secrets.DB_ENGINE}}
-
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage.xml
-        directory: ./coverage/reports/
-        fail_ci_if_error: true
