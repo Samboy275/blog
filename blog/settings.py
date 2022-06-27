@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY",)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = "users.User"
 # static path
@@ -186,7 +186,7 @@ if cwd == '/app' or cwd[:4] =='/tmp':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
 
     # allow all host headers.
-    ALLOWED_HOSTS = ['0.0.0.0']
+    ALLOWED_HOSTS = ['*']
 
     #static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
