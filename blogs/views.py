@@ -1,4 +1,3 @@
-from turtle import pos
 from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
