@@ -70,7 +70,7 @@ def post_view(request, post_id):
 
     post = BlogPost.objects.get(id = post_id)
     #comments 
-    comments = post.comments.filter(active=True)
+    comments = post.comments.all()
     comment_form = None
     new_comment = None
     if request.user.is_authenticated:
