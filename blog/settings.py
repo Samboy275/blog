@@ -37,6 +37,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
+EMAIL_USE_TLS = True 
 
 LOGIN_URl = "users/login/"
 # Application definition
@@ -187,7 +188,7 @@ if cwd == '/app' or cwd[:4] =='/tmp':
 
     # allow all host headers.
     ALLOWED_HOSTS = ['sudanese-masnoura-bloggat.herokuapp.com']
-    DEBUG = True
+    DEBUG = False
     #static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
