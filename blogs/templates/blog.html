@@ -69,11 +69,6 @@
         <div class="card" style="width: 40rem; height: 10rem;">
             
             <div class="card-body">
-                {% if new_comment %}
-                    <div class="alert alert-sccusses">
-                        your comment is awaiting moderation
-                    </div>
-                {% else %}
                     {% if user.is_authenticated %}
                         <form method="post" class="form">
                             {% csrf_token %}
@@ -83,7 +78,6 @@
                             {% endbuttons %}
                         </form>
                     {% endif %}
-                {% endif %}
             </div>
         </div>
         

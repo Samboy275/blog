@@ -31,7 +31,6 @@ class Comments(models.Model):
     owner = models.ForeignKey(User , on_delete=models.CASCADE)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
     class Meta:
         # orders comments in a list by date
         ordering = ['-date_added']

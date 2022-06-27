@@ -8,13 +8,10 @@ admin.site.register(BlogPost)
 class CommentAdmin(admin.ModelAdmin):
     """ admin managing comments """
     #displays properties specified for each comment in alist
-    list_display = ('post','text' , 'owner', 'date_added', 'active')
+    list_display = ('post','text' , 'owner', 'date_added')
     # filter comments based on given properties
-    list_filter = ('active', 'date_added')
+    list_filter = ('date_added',)
     # search database using givein properties 
     search_fields = ('post', 'text', 'owner')
     # uses approve action method to update active field for a set of comments
-    actions = ['approve_comments']
 
-    def approve_comments(self, request, queryset):
-        queryset.update(active=True)
