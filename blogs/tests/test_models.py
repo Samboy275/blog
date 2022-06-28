@@ -27,7 +27,7 @@ class TestModel (TestSetup):
         usernamepost = "postuser"
         post = self.create_test_blog(usernamepost)
 
-        comment = Comments.objects.create(text = "Anycomment text", post = post, owner = owner, active = True)
+        comment = Comments.objects.create(text = "Anycomment text", post = post, owner = owner)
 
         comment.save()
 
