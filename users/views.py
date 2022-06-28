@@ -44,7 +44,7 @@ def send_verification_email(user, request):
         'token' : generate_token.make_token(user)
     })
 
-    email =     (subject= email_subject, body= email_body, 
+    email = EmailMessage(subject= email_subject, body= email_body, 
                  from_email=settings.EMAIL_FROM_USER,
                  to=[user.email]
                 )
