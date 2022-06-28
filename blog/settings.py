@@ -151,6 +151,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Email Config
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_FROM_USER') 
 EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
