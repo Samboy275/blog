@@ -37,7 +37,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
-EMAIL_USE_TLS = True 
+
 
 LOGIN_URl = "users/login/"
 # Application definition
@@ -157,7 +157,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -191,6 +191,7 @@ if cwd == '/app' or cwd[:4] =='/tmp':
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     # allow all host headers.
     ALLOWED_HOSTS = ['sudanese-masnoura-bloggat.herokuapp.com']
     DEBUG = True
