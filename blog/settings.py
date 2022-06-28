@@ -155,8 +155,8 @@ EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
@@ -185,13 +185,6 @@ if cwd == '/app' or cwd[:4] =='/tmp':
 
     # honor the 'X-Forward-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
-    EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     # allow all host headers.
     ALLOWED_HOSTS = ['sudanese-masnoura-bloggat.herokuapp.com']
     DEBUG = True
