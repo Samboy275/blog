@@ -17,7 +17,7 @@ import sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# testing 
+# testing
 TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -26,9 +26,9 @@ TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 SECRET_KEY = os.environ.get("SECRET_KEY",)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost', 'sudanese-masnoura-bloggat.herokuapp.com']
 
 AUTH_USER_MODEL = "users.User"
 # static path
@@ -97,10 +97,10 @@ DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_HOST = os.environ.get("DB_HOST")
 DB_PORT = os.environ.get("DB_PORT")
-DB_ENGINE = os.environ.get("DB_ENGINE") 
+DB_ENGINE = os.environ.get("DB_ENGINE")
 DB_IS_AVAIL = all([
-        DB_USERNAME, 
-        DB_PASSWORD, 
+        DB_USERNAME,
+        DB_PASSWORD,
         DB_HOST,
         DB_PORT,
         DB_USER,
@@ -151,7 +151,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Email Config
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_FROM_USER') 
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_FROM_USER')
 EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_FROM_USER')
@@ -175,7 +175,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 
 
-# heruko settings 
+# heruko settings
 cwd = os.getcwd()
 
 if cwd == '/app' or cwd[:4] =='/tmp':
@@ -187,7 +187,6 @@ if cwd == '/app' or cwd[:4] =='/tmp':
     # honor the 'X-Forward-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
     # allow all host headers.
-    ALLOWED_HOSTS = ['sudanese-masnoura-bloggat.herokuapp.com']
     DEBUG = True
     #static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
