@@ -187,7 +187,7 @@ if cwd == '/app' or cwd[:4] =='/tmp':
     # honor the 'X-Forward-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
     # allow all host headers.
-    DEBUG = True
+    DEBUG = False
     #static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
